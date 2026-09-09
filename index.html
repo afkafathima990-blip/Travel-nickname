@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>清水・駿河湾クルーズ日帰り旅行 しおり</title>
+  <style>
+    :root {
+      --primary: #1e5f8a;
+      --accent: #e67e22;
+      --text: #333333;
+      --text-muted: #666666;
+      --bg: #f4f7f9;
+      --card-bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a4b6e, #2980b9);
+      color: white;
+      text-align: center;
+      padding: 35px 20px 25px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+    header h1 { font-size: 1.7rem; margin-bottom: 6px; }
+    header p { font-size: 0.95rem; opacity: 0.9; }
+
+    .container {
+      max-width: 760px;
+      margin: -15px auto 0;
+      padding: 0 16px;
+    }
+
+    /* 概要カード */
+    .overview-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+    }
+    .overview-item { border-left: 3px solid var(--primary); padding-left: 10px; }
+    .overview-label { font-size: 0.75rem; color: var(--text-muted); }
+    .overview-value { font-weight: bold; font-size: 0.95rem; }
+
+    /* ステータスバー */
+    .status-bar {
+      background: #334155;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    /* フィルターボタン */
+    .filter-buttons {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .filter-btn {
+      background: #e2e8f0;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin: 24px 0 14px;
+      border-left: 5px solid var(--accent);
+      padding-left: 8px;
+    }
+
+    /* タイムライン */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 15px;
+      bottom: 20px;
+      width: 2px;
+      background: #cbd5e1;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 18px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -24px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid var(--primary);
+    }
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .timeline-time { font-size: 1.05rem; font-weight: bold; color: var(--primary); }
+    .transport-tag {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .tag-bus { background: #e0f2fe; color: #0369a1; }
+    .tag-cruise { background: #e0e7ff; color: #4338ca; }
+    .tag-walk { background: #fef3c7; color: #b45309; }
+    .tag-meal { background: #fee2e2; color: #b91c1c; }
+    .timeline-title { font-size: 1rem; font-weight: bold; margin-bottom: 4px; }
+    .timeline-desc { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* 注意事項 */
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+    .card ul { padding-left: 20px; }
+    .card li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">中部コンピュータ・パティシエ専門学校</div>
+    <h1>清水・駿河湾クルーズ 日帰り旅行</h1>
+    <p>令和8年9月12日（土） 行程表</p>
+  </header>
+
+  <div class="container">
+    <!-- 概要 -->
+    <div class="overview-card">
+      <div class="overview-item">
+        <div class="overview-label">出発日</div>
+        <div class="overview-value">2026年9月12日(土)</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">参加人数</div>
+        <div class="overview-value">22名 (学生20/教員1/添乗1)</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">車両</div>
+        <div class="overview-value">中型バス</div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-label">取扱旅行社</div>
+        <div class="overview-value">株式会社 第一観光</div>
+      </div>
+    </div>
+
+    <!-- リアルタイム時計 -->
+    <div class="status-bar">
+      <div>🕒 現在時刻: <span id="clock">--:--:--</span></div>
+      <div>行程案内</div>
+    </div>
+
+    <!-- 絞り込みボタン -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filterSchedule('all', this)">すべて</button>
+      <button class="filter-btn" onclick="filterSchedule('bus', this)">🚌 バス移動</button>
+      <button class="filter-btn" onclick="filterSchedule('cruise', this)">🚢 クルーズ</button>
+      <button class="filter-btn" onclick="filterSchedule('spot', this)">⛩️ 観光・食事</button>
+    </div>
+
+    <div class="section-title">スケジュール</div>
+
+    <div class="timeline" id="timelineList">
+      <div class="timeline-item" data-type="bus">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">08:45 / 09:00</span>
+          <span class="transport-tag tag-bus">バス</span>
+        </div>
+        <div class="timeline-title">学校前 集合・出発</div>
+        <div class="timeline-desc">8:45 配車完了、点呼後に9:00出発。</div>
+      </div>
+
+      <div class="timeline-item" data-type="bus">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">09:30</span>
+          <span class="transport-tag tag-bus">高速道路</span>
+        </div>
+        <div class="timeline-title">豊川IC 〜 新東名高速道路（休憩1回）</div>
+        <div class="timeline-desc">サービスエリア等で途中1回トイレ休憩を取ります。</div>
+      </div>
+
+      <div class="timeline-item" data-type="bus">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">11:00</span>
+          <span class="transport-tag tag-bus">高速道路</span>
+        </div>
+        <div class="timeline-title">清水IC 到着</div>
+        <div class="timeline-desc">高速道路を降り、目的地へ移動します。</div>
+      </div>
+
+      <div class="timeline-item" data-type="spot">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">11:20 〜 12:40</span>
+          <span class="transport-tag tag-meal">昼食</span>
+        </div>
+        <div class="timeline-title">清水エスパルスドリームプラザ（はとばキッチン）</div>
+        <div class="timeline-desc">11:20到着、11:40より昼食および施設内散策。</div>
+      </div>
+
+      <div class="timeline-item" data-type="cruise">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">13:00 〜 13:40</span>
+          <span class="transport-tag tag-cruise">船（クルーズ）</span>
+        </div>
+        <div class="timeline-title">駿河湾クルーズ乗船</div>
+        <div class="timeline-desc">清水港より40分間のクルージングをお楽しみください。</div>
+      </div>
+
+      <div class="timeline-item" data-type="spot">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">14:10 〜 14:45</span>
+          <span class="transport-tag tag-walk">観光</span>
+        </div>
+        <div class="timeline-title">三保の松原 見学</div>
+        <div class="timeline-desc">名勝地・三保の松原の散策と記念撮影。</div>
+      </div>
+
+      <div class="timeline-item" data-type="spot">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">15:00 〜 16:20</span>
+          <span class="transport-tag tag-walk">観光・参拝</span>
+        </div>
+        <div class="timeline-title">久能山東照宮 参拝</div>
+        <div class="timeline-desc">久能山下駐車場利用。徳川家康公を祀る社殿などを拝観。</div>
+      </div>
+
+      <div class="timeline-item" data-type="bus">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">16:40 〜 18:30</span>
+          <span class="transport-tag tag-bus">帰路バス</span>
+        </div>
+        <div class="timeline-title">久能山IC ＝（休憩1回）＝ 豊川IC</div>
+        <div class="timeline-desc">高速道路を利用し帰路へ（途中1回休憩）。</div>
+      </div>
+
+      <div class="timeline-item" data-type="bus">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <span class="timeline-time">19:00 到着予定</span>
+          <span class="transport-tag tag-bus">解散</span>
+        </div>
+        <div class="timeline-title">学校前 到着・解散</div>
+        <div class="timeline-desc">お疲れ様でした！忘れ物のないよう帰宅してください。</div>
+      </div>
+    </div>
+
+    <div class="section-title">注意事項</div>
+    <div class="card">
+      <ul>
+        <li>安全確保のため、<strong>バス走行中は必ずシートベルトを着用</strong>してください。</li>
+        <li>道路交通状況により、到着・出発時刻が変更になる場合があります。</li>
+        <li>集合時間は厳守してください。</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // 時計の更新
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent =
+        `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // カテゴリフィルター
+    function filterSchedule(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.timeline-item').forEach(item => {
+        const type = item.getAttribute('data-type');
+        item.style.display = (category === 'all' || type === category) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
